@@ -1,6 +1,10 @@
 // vite.config.ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
+
 export default defineConfig({
-  base: '/',
+  base: '/', // ✅ correct for custom domain
   plugins: [react()],
   resolve: {
     alias: {
@@ -11,4 +15,4 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
   },
-});
+})
