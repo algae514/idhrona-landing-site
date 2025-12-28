@@ -8,6 +8,11 @@ export default defineConfig({
     ? '/idhrona-landing-site/'
     : '/',
   plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
   build: {
     outDir: 'dist',
     assetsDir: 'assets'
