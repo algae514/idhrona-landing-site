@@ -1,5 +1,4 @@
-import { Users, TrendingUp, Code, Lightbulb, BarChart3, BookOpen } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Users, TrendingUp, Code, Lightbulb, BarChart3, BookOpen, GraduationCap } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
 
 const Navbar = () => (
@@ -23,7 +22,6 @@ const Navbar = () => (
         <a href="#courses" className="text-muted-foreground hover:text-foreground transition-colors" role="menuitem" aria-label="View Courses section">Courses</a>
         <a href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors" role="menuitem" aria-label="Learn how it works">How It Works</a>
       </div>
-      <Button variant="accent" size="lg" aria-label="Get started with iDhrona">Get Started</Button>
     </div>
   </nav>
 );
@@ -52,17 +50,8 @@ const HeroSection = () => (
           Empower your classroom with real-time insights into student challenges. 
           Our interactive textbooks help you identify struggles early and adapt your approach for better outcomes.
         </p>
-        
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.2s' }} role="group" aria-label="Call to action buttons">
-          <Button variant="accent" size="xl" aria-label="Start your free trial of iDhrona" itemProp="url">
-            Start Free Trial
-          </Button>
-          <Button variant="heroOutline" size="xl" aria-label="Watch a demo of iDhrona platform">
-            Watch Demo
-          </Button>
-        </div>
 
-        <div className="mt-16 flex items-center justify-center gap-8 text-muted-foreground animate-fade-in" style={{ animationDelay: '0.4s' }} role="group" aria-label="Platform statistics">
+        <div className="mt-16 flex items-center justify-center gap-8 text-muted-foreground animate-fade-in" style={{ animationDelay: '0.2s' }} role="group" aria-label="Platform statistics">
           <div className="flex items-center gap-2" itemScope itemType="https://schema.org/QuantitativeValue">
             <Users className="w-5 h-5" aria-hidden="true" />
             <span className="text-sm">
@@ -154,17 +143,27 @@ const FeaturesSection = () => (
 const courses = [
   {
     language: "C Programming",
-    level: "Fundamentals to Advanced",
-    topics: ["Pointers & Memory", "Data Structures", "File I/O", "Algorithms"],
+    description: "Start your learning journey with this comprehensive module.",
     color: "from-primary to-primary-glow",
-    icon: "C"
+    icon: GraduationCap
   },
   {
-    language: "Python Programming",
-    level: "Beginner to Intermediate",
-    topics: ["Core Syntax", "OOP Concepts", "Libraries", "Data Analysis"],
+    language: "Data Science with Python",
+    description: "Start your learning journey with this comprehensive module.",
     color: "from-accent to-accent/70",
-    icon: "Py"
+    icon: GraduationCap
+  },
+  {
+    language: "Machine Learning",
+    description: "Start your learning journey with this comprehensive module.",
+    color: "from-primary to-primary-glow",
+    icon: GraduationCap
+  },
+  {
+    language: "Mathematics for AI",
+    description: "Start your learning journey with this comprehensive module.",
+    color: "from-accent to-accent/70",
+    icon: GraduationCap
   }
 ];
 
@@ -180,37 +179,29 @@ const CoursesSection = () => (
         </p>
       </header>
       
-      <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {courses.map((course, index) => (
-          <article 
+          <a
             key={course.language}
-            className="card-elevated p-8 relative overflow-hidden group animate-scale-in"
-            style={{ animationDelay: `${index * 0.15}s` }}
+            href="http://app.idhrona.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`card-elevated p-6 relative overflow-hidden group animate-scale-in cursor-pointer transition-all hover:shadow-xl hover:-translate-y-1 ${index === 0 ? 'border-2 border-primary/30' : ''}`}
+            style={{ animationDelay: `${index * 0.1}s` }}
             itemScope
             itemType="https://schema.org/Course"
             itemProp="itemListElement"
+            aria-label={`Navigate to ${course.language} course`}
           >
             <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${course.color} opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition-opacity`} aria-hidden="true" />
             
-            <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${course.color} flex items-center justify-center mb-6`} aria-hidden="true">
-              <span className="text-2xl font-bold text-primary-foreground">{course.icon}</span>
+            <div className={`w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4`} aria-hidden="true">
+              <course.icon className="w-6 h-6 text-primary" />
             </div>
             
-            <h3 className="font-serif text-2xl mb-2" itemProp="name">{course.language}</h3>
-            <p className="text-muted-foreground mb-6" itemProp="educationalLevel">{course.level}</p>
-            
-            <div className="flex flex-wrap gap-2 mb-6" itemProp="teaches" itemScope itemType="https://schema.org/ItemList">
-              {course.topics.map(topic => (
-                <span key={topic} className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm" itemProp="itemListElement">
-                  {topic}
-                </span>
-              ))}
-            </div>
-            
-            <Button variant="hero" className="w-full" aria-label={`Explore ${course.language} course`}>
-              Explore Course
-            </Button>
-          </article>
+            <h3 className="font-serif text-xl font-semibold mb-2" itemProp="name">{course.language}</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed" itemProp="description">{course.description}</p>
+          </a>
         ))}
       </div>
     </div>
@@ -290,22 +281,9 @@ const CTASection = () => (
       <h2 className="font-serif text-4xl md:text-5xl text-primary-foreground mb-6" itemProp="headline">
         Ready to Transform Your Teaching?
       </h2>
-      <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-10" itemProp="description">
+      <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto" itemProp="description">
         Join thousands of educators who are using data-driven insights to help their students succeed in programming.
       </p>
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <Button variant="accent" size="xl" aria-label="Start your free trial of iDhrona">
-          Start Your Free Trial
-        </Button>
-        <Button 
-          variant="outline" 
-          size="xl"
-          className="border-primary-foreground/30 text-primary-foreground bg-transparent hover:bg-primary-foreground/10"
-          aria-label="Schedule a demo of iDhrona"
-        >
-          Schedule a Demo
-        </Button>
-      </div>
     </div>
   </section>
 );
