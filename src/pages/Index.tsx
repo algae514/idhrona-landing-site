@@ -1,4 +1,12 @@
 import { Users, TrendingUp, Code, Lightbulb, BarChart3, BookOpen, GraduationCap } from "lucide-react";
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import logo from "@/assets/logo.jpeg";
 
 const Navbar = () => (
@@ -164,49 +172,92 @@ const courses = [
     description: "Start your learning journey with this comprehensive module.",
     color: "from-accent to-accent/70",
     icon: GraduationCap
+  },
+  {
+    language: "Data Structures with AI",
+    description: "Start your learning journey with this comprehensive module.",
+    color: "from-primary to-primary-glow",
+    icon: GraduationCap
+  },
+  {
+    language: "Data Science with AI",
+    description: "Start your learning journey with this comprehensive module.",
+    color: "from-accent to-accent/70",
+    icon: GraduationCap
   }
 ];
 
-const CoursesSection = () => (
-  <section id="courses" className="py-24" itemScope itemType="https://schema.org/ItemList">
-    <div className="container mx-auto px-6">
-      <header className="text-center mb-16">
-        <h2 className="font-serif text-4xl md:text-5xl mb-4" itemProp="name">
-          Available Courses
-        </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto" itemProp="description">
-          Comprehensive interactive textbooks for foundational programming languages
-        </p>
-      </header>
-      
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {courses.map((course, index) => (
-          <a
-            key={course.language}
-            href="http://app.idhrona.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`card-elevated p-6 relative overflow-hidden group animate-scale-in cursor-pointer transition-all hover:shadow-xl hover:-translate-y-1 ${index === 0 ? 'border-2 border-primary/30' : ''}`}
-            style={{ animationDelay: `${index * 0.1}s` }}
-            itemScope
-            itemType="https://schema.org/Course"
-            itemProp="itemListElement"
-            aria-label={`Navigate to ${course.language} course`}
-          >
-            <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${course.color} opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition-opacity`} aria-hidden="true" />
+const CoursesSection = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleCourseClick = (e: React.MouseEvent, courseLanguage: string) => {
+    if (courseLanguage === "C Programming") {
+      // Allow default link behavior for C Programming
+      return;
+    } else {
+      // Prevent default and show dialog for other courses
+      e.preventDefault();
+      setIsDialogOpen(true);
+    }
+  };
+
+  return (
+    <section id="courses" className="py-24" itemScope itemType="https://schema.org/ItemList">
+      <div className="container mx-auto px-6">
+        <header className="text-center mb-16">
+          <h2 className="font-serif text-4xl md:text-5xl mb-4" itemProp="name">
+            Available Courses
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto" itemProp="description">
+            Comprehensive interactive textbooks for foundational programming languages
+          </p>
+        </header>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {courses.map((course, index) => {
+            const isCProgramming = course.language === "C Programming";
             
-            <div className={`w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4`} aria-hidden="true">
-              <course.icon className="w-6 h-6 text-primary" />
-            </div>
-            
-            <h3 className="font-serif text-xl font-semibold mb-2" itemProp="name">{course.language}</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed" itemProp="description">{course.description}</p>
-          </a>
-        ))}
+            return (
+              <a
+                key={course.language}
+                href={isCProgramming ? "http://app.idhrona.com/" : "#"}
+                target={isCProgramming ? "_blank" : undefined}
+                rel={isCProgramming ? "noopener noreferrer" : undefined}
+                onClick={(e) => handleCourseClick(e, course.language)}
+                className={`card-elevated p-6 relative overflow-hidden group animate-scale-in cursor-pointer transition-all hover:shadow-xl hover:-translate-y-1 ${index === 0 ? 'border-2 border-primary/30' : ''}`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+                itemScope
+                itemType="https://schema.org/Course"
+                itemProp="itemListElement"
+                aria-label={isCProgramming ? `Navigate to ${course.language} course` : `Book a demo for ${course.language}`}
+              >
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${course.color} opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition-opacity`} aria-hidden="true" />
+                
+                <div className={`w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4`} aria-hidden="true">
+                  <course.icon className="w-6 h-6 text-primary" />
+                </div>
+                
+                <h3 className="font-serif text-xl font-semibold mb-2" itemProp="name">{course.language}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed" itemProp="description">{course.description}</p>
+              </a>
+            );
+          })}
+        </div>
       </div>
-    </div>
-  </section>
-);
+
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="bg-card border-border shadow-xl">
+          <DialogHeader>
+            <DialogTitle className="font-serif text-2xl text-card-foreground">Book a Demo</DialogTitle>
+            <DialogDescription className="text-base mt-2 text-muted-foreground">
+              Interested in learning more about this course? Book a demo to see how it can help transform your teaching experience.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+    </section>
+  );
+};
 
 const steps = [
   {
