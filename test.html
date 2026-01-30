@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Print Shop Flyer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 210mm;
+      height: 297mm;
+    }
+
+    body {
+      background: #f5f5f5;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative corner accents */
+    .page::before,
+    .page::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border: 2px solid #1a1a1a;
+    }
+
+    .page::before {
+      top: 30px;
+      left: 30px;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .page::after {
+      bottom: 30px;
+      right: 30px;
+      border-left: none;
+      border-top: none;
+    }
+
+    .content {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .logo {
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      width: 150px;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      color: #000000;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      font-weight: 500;
+      color: #888;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .divider {
+      width: 50px;
+      height: 2px;
+      background: #1a1a1a;
+      margin: 0 auto 35px;
+    }
+
+    .services {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .service {
+      font-size: 20px;
+      font-weight: 500;
+      color: #000000;
+      letter-spacing: 2px;
+    }
+
+    .phone-section {
+      margin-top: 15px;
+    }
+
+    .phone-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #999;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .phone {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a1a1a;
+      letter-spacing: 3px;
+    }
+
+    .timing {
+      margin-top: 25px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #666;
+      letter-spacing: 2px;
+    }
+
+    @media print {
+      html, body {
+        width: 210mm;
+        height: 297mm;
+        background: none;
+      }
+      .page {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="content">
+      <div class="logo">
+        <img src="logo_larger.png" alt="Print Shop Logo">
+      </div>
+
+      <div class="title">PRINT SHOP</div>
+      <div class="tagline">Quality Printing Services</div>
+
+      <div class="divider"></div>
+
+      <div class="services">
+        <div class="service">Color Prints</div>
+        <div class="service">Black & White Prints</div>
+        <div class="service">Scanning</div>
+        <div class="service">Xerox</div>
+      </div>
+
+      <div class="phone-section">
+        <div class="phone-label">WhatsApp us on</div>
+        <div class="phone">8340089454</div>
+      </div>
+
+      <div class="timing">
+        Timing - everyday evening 5 PM – 9 PM
+      </div>
+    </div>
+  </div>
+</body>
+</html>

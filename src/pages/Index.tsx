@@ -487,21 +487,24 @@ const courses = [
     description: "Master the fundamentals of C programming with hands-on exercises and real-time feedback.",
     color: "from-primary to-primary/70",
     icon: Code,
-    available: true
+    available: true,
+    path: "/course/c-programming"
   },
   {
     language: "C Advanced",
     description: "Deep dive into pointers, memory management, and advanced C concepts.",
     color: "from-accent to-accent/70",
     icon: Terminal,
-    available: false
+    available: true,
+    path: "/course/advanced-c-programming"
   },
   {
     language: "Python Basic",
     description: "Start your Python journey with interactive exercises and guided learning.",
     color: "from-primary to-primary/70",
     icon: Code,
-    available: false
+    available: true,
+    path: "/course/basic-python"
   },
   {
     language: "Python Advanced",
@@ -529,7 +532,8 @@ const courses = [
     description: "Learn object-oriented principles with Java programming language.",
     color: "from-primary to-primary/70",
     icon: Code,
-    available: false
+    available: true,
+    path: "/course/oops-java"
   },
   {
     language: "Data Structures using C++",
@@ -572,7 +576,7 @@ const CoursesSection = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleCourseClick = (e: React.MouseEvent, course: typeof courses[0]) => {
-    if (course.available) {
+    if (course.available || course.path) {
       return;
     } else {
       e.preventDefault();
@@ -602,9 +606,9 @@ const CoursesSection = () => {
           {courses.map((course, index) => (
             <a
               key={course.language}
-              href={course.available ? "http://app.idhrona.com/" : "#"}
-              target={course.available ? "_blank" : undefined}
-              rel={course.available ? "noopener noreferrer" : undefined}
+              href={course.path ? course.path : course.available ? "http://app.idhrona.com/" : "#"}
+              target={course.path ? undefined : course.available ? "_blank" : undefined}
+              rel={course.path ? undefined : course.available ? "noopener noreferrer" : undefined}
               onClick={(e) => handleCourseClick(e, course)}
               className={`group relative rounded-2xl md:rounded-3xl bg-card border border-border/50 p-5 md:p-8 hover:border-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 animate-scale-in overflow-hidden ${course.available ? 'ring-2 ring-primary/30' : ''}`}
               style={{ animationDelay: `${index * 0.1}s` }}
