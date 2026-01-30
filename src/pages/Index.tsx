@@ -488,7 +488,7 @@ const courses = [
     color: "from-primary to-primary/70",
     icon: Code,
     available: true,
-    path: "/course/c-programming"
+    path: "https://app.idhrona.com/course/c-programming"
   },
   {
     language: "C Advanced",
@@ -496,7 +496,7 @@ const courses = [
     color: "from-accent to-accent/70",
     icon: Terminal,
     available: true,
-    path: "/course/advanced-c-programming"
+    path: "https://app.idhrona.com/course/advanced-c-programming"
   },
   {
     language: "Python Basic",
@@ -504,7 +504,7 @@ const courses = [
     color: "from-primary to-primary/70",
     icon: Code,
     available: true,
-    path: "/course/basic-python"
+    path: "https://app.idhrona.com/course/basic-python"
   },
   {
     language: "Python Advanced",
@@ -533,7 +533,7 @@ const courses = [
     color: "from-primary to-primary/70",
     icon: Code,
     available: true,
-    path: "/course/oops-java"
+    path: "https://app.idhrona.com/course/oops-java"
   },
   {
     language: "Data Structures using C++",
@@ -607,8 +607,8 @@ const CoursesSection = () => {
             <a
               key={course.language}
               href={course.path ? course.path : course.available ? "http://app.idhrona.com/" : "#"}
-              target={course.path ? undefined : course.available ? "_blank" : undefined}
-              rel={course.path ? undefined : course.available ? "noopener noreferrer" : undefined}
+              target={course.path || course.available ? "_blank" : undefined}
+              rel={course.path || course.available ? "noopener noreferrer" : undefined}
               onClick={(e) => handleCourseClick(e, course)}
               className={`group relative rounded-2xl md:rounded-3xl bg-card border border-border/50 p-5 md:p-8 hover:border-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 animate-scale-in overflow-hidden ${course.available ? 'ring-2 ring-primary/30' : ''}`}
               style={{ animationDelay: `${index * 0.1}s` }}
