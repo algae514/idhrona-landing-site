@@ -1,5 +1,6 @@
-import { Users, TrendingUp, Code, Lightbulb, BarChart3, BookOpen, GraduationCap, ArrowRight, Play, Sparkles, Brain, Target, Zap, MessageSquare, Terminal, CheckCircle2, Bot, Send } from "lucide-react";
+import { Users, TrendingUp, Code, Lightbulb, BarChart3, BookOpen, GraduationCap, ArrowRight, Play, Sparkles, Brain, Target, Zap, MessageSquare, Terminal, CheckCircle2, Bot, Send, Database, Server } from "lucide-react";
 import { useState } from "react";
+import { ScrollReveal, StaggerContainer, StaggerItem, ParallaxLayer } from "@/components/motion";
 import {
   Dialog,
   DialogContent,
@@ -168,8 +169,10 @@ const HeroSection = () => (
     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" aria-hidden="true" />
     
     {/* Dot pattern */}
-    <DotPattern />
-    
+    <ParallaxLayer speed={0.05} className="absolute inset-0">
+      <DotPattern />
+    </ParallaxLayer>
+
     <div className="container mx-auto px-4 md:px-6 relative z-10">
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Left side - Text content */}
@@ -236,7 +239,7 @@ const HeroSection = () => (
 
 // Mockup Code Editor Component
 const CodeEditorMockup = () => (
-  <div className="bg-[#1e1e1e] rounded-xl md:rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+  <div className="bg-[#1e1e1e] rounded-xl md:rounded-2xl overflow-hidden shadow-2xl border border-white/10 h-full flex flex-col">
     {/* Editor Header */}
     <div className="flex items-center justify-between px-3 md:px-4 py-2 md:py-3 bg-[#2d2d2d] border-b border-white/5">
       <div className="flex items-center gap-2">
@@ -256,7 +259,7 @@ const CodeEditorMockup = () => (
     </div>
     
     {/* Code Content */}
-    <div className="p-2 md:p-4 font-mono text-[10px] md:text-sm leading-relaxed overflow-x-auto">
+    <div className="p-2 md:p-4 font-mono text-[10px] md:text-sm leading-relaxed overflow-x-auto flex-1">
       <div className="flex">
         <div className="text-white/30 text-right pr-2 md:pr-4 select-none">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => (
@@ -293,7 +296,7 @@ const CodeEditorMockup = () => (
 
 // Mockup AI Tutor Chat Component
 const AIChatMockup = () => (
-  <div className="bg-card rounded-xl md:rounded-2xl overflow-hidden shadow-2xl border border-border">
+  <div className="bg-card rounded-xl md:rounded-2xl overflow-hidden shadow-2xl border border-border h-full flex flex-col">
     {/* Chat Header */}
     <div className="flex items-center justify-between px-3 md:px-4 py-2 md:py-3 bg-secondary/50 border-b border-border">
       <div className="flex items-center gap-2 md:gap-3">
@@ -316,7 +319,7 @@ const AIChatMockup = () => (
     </div>
     
     {/* Chat Messages */}
-    <div className="p-3 md:p-4 space-y-3 md:space-y-4 h-[220px] md:h-[280px] overflow-y-auto">
+    <div className="p-3 md:p-4 space-y-3 md:space-y-4 flex-1 min-h-[220px] md:min-h-[280px] overflow-y-auto">
       {/* User Message */}
       <div className="flex justify-end">
         <div className="bg-primary text-primary-foreground rounded-xl md:rounded-2xl rounded-tr-sm px-3 md:px-4 py-1.5 md:py-2 max-w-[85%]">
@@ -363,50 +366,62 @@ const AIChatMockup = () => (
 // Product Demo Section with video
 const DemoSection = () => (
   <section id="demo" className="py-12 md:py-24 bg-secondary/30 relative overflow-hidden">
-    <DotPattern className="opacity-30" />
-    
+    <ParallaxLayer speed={0.08} className="absolute inset-0">
+      <DotPattern className="opacity-30" />
+    </ParallaxLayer>
+
     <div className="container mx-auto px-4 md:px-6 relative z-10">
-      <header className="text-center mb-8 md:mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium mb-4 md:mb-6 border border-primary/20">
-          <Play className="w-3 h-3 md:w-4 md:h-4" />
-          Platform Demo
-        </div>
-        <h2 className="font-serif text-2xl md:text-4xl lg:text-5xl mb-3 md:mb-4">
-          iDhrona in Action
-        </h2>
-        <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto">
-          A glimpse into how iDhrona combines interactive coding, AI guidance, and structured learning
-        </p>
-      </header>
-      
-      <div className="grid lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
+      <ScrollReveal direction="up">
+        <header className="text-center mb-8 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium mb-4 md:mb-6 border border-primary/20">
+            <Play className="w-3 h-3 md:w-4 md:h-4" />
+            Platform Demo
+          </div>
+          <h2 className="font-serif text-2xl md:text-4xl lg:text-5xl mb-3 md:mb-4">
+            iDhrona in Action
+          </h2>
+          <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto">
+            A glimpse into how iDhrona combines interactive coding, AI guidance, and structured learning
+          </p>
+        </header>
+      </ScrollReveal>
+
+      <div className="grid lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto items-stretch">
         {/* Code Editor Demo */}
-        <div className="space-y-3 md:space-y-4">
-          <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
-            <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Terminal className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+        <ScrollReveal direction="left" delay={0.1} className="flex flex-col">
+          <div className="flex flex-col flex-1 space-y-3 md:space-y-4">
+            <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Terminal className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-sm md:text-base">Built-in Code Compiler</h3>
+                <p className="text-xs md:text-sm text-muted-foreground">Write, run, and debug code in your browser</p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-semibold text-sm md:text-base">Built-in Code Compiler</h3>
-              <p className="text-xs md:text-sm text-muted-foreground">Write, run, and debug code in your browser</p>
+            <div className="flex-1">
+              <CodeEditorMockup />
             </div>
           </div>
-          <CodeEditorMockup />
-        </div>
-        
+        </ScrollReveal>
+
         {/* AI Chat Demo */}
-        <div className="space-y-3 md:space-y-4">
-          <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
-            <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Bot className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+        <ScrollReveal direction="right" delay={0.2} className="flex flex-col">
+          <div className="flex flex-col flex-1 space-y-3 md:space-y-4">
+            <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Bot className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-sm md:text-base">AI Tutor — Your Personal Guru</h3>
+                <p className="text-xs md:text-sm text-muted-foreground">Get instant explanations for any concept</p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-semibold text-sm md:text-base">AI Tutor — Your Personal Guru</h3>
-              <p className="text-xs md:text-sm text-muted-foreground">Get instant explanations for any concept</p>
+            <div className="flex-1">
+              <AIChatMockup />
             </div>
           </div>
-          <AIChatMockup />
-        </div>
+        </ScrollReveal>
       </div>
     </div>
   </section>
@@ -442,29 +457,33 @@ const featureHighlights = [
 
 const FeaturesSection = () => (
   <section id="features" className="py-12 md:py-24 relative overflow-hidden" aria-labelledby="features-heading" itemScope itemType="https://schema.org/ItemList">
-    <DotPattern className="opacity-50" />
-    
+    <ParallaxLayer speed={0.06} className="absolute inset-0">
+      <DotPattern className="opacity-50" />
+    </ParallaxLayer>
+
     <div className="container mx-auto px-4 md:px-6 relative z-10">
-      <header className="text-center mb-8 md:mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium mb-4 md:mb-6 border border-primary/20">
-          <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
-          Why Choose iDhrona
-        </div>
-        <h2 id="features-heading" className="font-serif text-2xl md:text-4xl lg:text-5xl mb-3 md:mb-4" itemProp="name">
-          Everything You Need to Master Coding
-        </h2>
-        <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto" itemProp="description">
-          A complete learning environment that adapts to you — like a guru who understands every student's unique journey
-        </p>
-      </header>
-      
+      <ScrollReveal direction="up">
+        <header className="text-center mb-8 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium mb-4 md:mb-6 border border-primary/20">
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
+            Why Choose iDhrona
+          </div>
+          <h2 id="features-heading" className="font-serif text-2xl md:text-4xl lg:text-5xl mb-3 md:mb-4" itemProp="name">
+            Everything You Need to Master Coding
+          </h2>
+          <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto" itemProp="description">
+            A complete learning environment that adapts to you — like a guru who understands every student's unique journey
+          </p>
+        </header>
+      </ScrollReveal>
+
       {/* Feature Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto">
-        {featureHighlights.map((feature, index) => (
-          <div
+      <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto" staggerDelay={0.08}>
+        {featureHighlights.map((feature) => (
+          <StaggerItem
             key={feature.title}
-            className={`relative group rounded-2xl md:rounded-3xl bg-gradient-to-br ${feature.gradient} border border-border/50 p-4 md:p-6 hover:border-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 animate-scale-in overflow-hidden`}
-            style={{ animationDelay: `${index * 0.1}s` }}
+            variant="scale"
+            className={`relative group rounded-2xl md:rounded-3xl bg-gradient-to-br ${feature.gradient} border border-border/50 p-4 md:p-6 hover:border-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 overflow-hidden`}
           >
             <div className="absolute inset-0 bg-card/90 backdrop-blur-sm" />
             <div className="relative z-10">
@@ -474,9 +493,9 @@ const FeaturesSection = () => (
               <h3 className="font-serif text-sm md:text-lg font-semibold mb-1 md:mb-2">{feature.title}</h3>
               <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">{feature.description}</p>
             </div>
-          </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
     </div>
   </section>
 );
@@ -569,6 +588,30 @@ const courses = [
     color: "from-accent to-accent/70",
     icon: Lightbulb,
     available: false
+  },
+  {
+    language: "NoSQL Databases",
+    description: "Explore document, key-value, and graph databases with hands-on NoSQL practice.",
+    color: "from-primary to-primary/70",
+    icon: Database,
+    available: true,
+    path: "https://app.idhrona.com/course/nosql"
+  },
+  {
+    language: "RDBMS",
+    description: "Master relational database design, SQL queries, and database management fundamentals.",
+    color: "from-accent to-accent/70",
+    icon: Server,
+    available: true,
+    path: "https://app.idhrona.com/course/rdbms-practical"
+  },
+  {
+    language: "DevOps",
+    description: "Learn CI/CD pipelines, containerization, and infrastructure automation practices.",
+    color: "from-primary to-primary/70",
+    icon: Terminal,
+    available: true,
+    path: "https://app.idhrona.com/course/devops"
   }
 ];
 
@@ -586,37 +629,40 @@ const CoursesSection = () => {
 
   return (
     <section id="courses" className="py-12 md:py-24 relative overflow-hidden" itemScope itemType="https://schema.org/ItemList">
-      <DotPattern className="opacity-30" />
-      
+      <ParallaxLayer speed={0.06} className="absolute inset-0">
+        <DotPattern className="opacity-30" />
+      </ParallaxLayer>
+
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <header className="text-center mb-8 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium mb-4 md:mb-6 border border-primary/20">
-            <BookOpen className="w-3 h-3 md:w-4 md:h-4" />
-            Interactive Courses
-          </div>
-          <h2 className="font-serif text-2xl md:text-4xl lg:text-5xl mb-3 md:mb-4" itemProp="name">
-            Learn by Doing
-          </h2>
-          <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto" itemProp="description">
-            Interactive textbooks with embedded code editors, AI explanations, and hands-on exercises
-          </p>
-        </header>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
-          {courses.map((course, index) => (
-            <a
-              key={course.language}
-              href={course.path ? course.path : course.available ? "http://app.idhrona.com/" : "#"}
-              target={course.path || course.available ? "_blank" : undefined}
-              rel={course.path || course.available ? "noopener noreferrer" : undefined}
-              onClick={(e) => handleCourseClick(e, course)}
-              className={`group relative rounded-2xl md:rounded-3xl bg-card border border-border/50 p-5 md:p-8 hover:border-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 animate-scale-in overflow-hidden ${course.available ? 'ring-2 ring-primary/30' : ''}`}
-              style={{ animationDelay: `${index * 0.1}s` }}
-              itemScope
-              itemType="https://schema.org/Course"
-              itemProp="itemListElement"
-              aria-label={course.available ? `Navigate to ${course.language} course` : `Book a demo for ${course.language}`}
-            >
+        <ScrollReveal direction="up">
+          <header className="text-center mb-8 md:mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium mb-4 md:mb-6 border border-primary/20">
+              <BookOpen className="w-3 h-3 md:w-4 md:h-4" />
+              Interactive Courses
+            </div>
+            <h2 className="font-serif text-2xl md:text-4xl lg:text-5xl mb-3 md:mb-4" itemProp="name">
+              Learn by Doing
+            </h2>
+            <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto" itemProp="description">
+              Interactive textbooks with embedded code editors, AI explanations, and hands-on exercises
+            </p>
+          </header>
+        </ScrollReveal>
+
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto" staggerDelay={0.05}>
+          {courses.map((course) => (
+            <StaggerItem key={course.language} variant="scale">
+              <a
+                href={course.path ? course.path : course.available ? "http://app.idhrona.com/" : "#"}
+                target={course.path || course.available ? "_blank" : undefined}
+                rel={course.path || course.available ? "noopener noreferrer" : undefined}
+                onClick={(e) => handleCourseClick(e, course)}
+                className={`block group relative rounded-2xl md:rounded-3xl bg-card border border-border/50 p-5 md:p-8 hover:border-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 overflow-hidden ${course.available ? 'ring-2 ring-primary/30' : ''}`}
+                itemScope
+                itemType="https://schema.org/Course"
+                itemProp="itemListElement"
+                aria-label={course.available ? `Navigate to ${course.language} course` : `Book a demo for ${course.language}`}
+              >
               {/* Gradient blob */}
               <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br ${course.color} opacity-20 rounded-full blur-3xl group-hover:opacity-30 transition-opacity`} aria-hidden="true" />
               
@@ -629,9 +675,10 @@ const CoursesSection = () => {
                 <p className="text-muted-foreground text-xs md:text-sm leading-relaxed mb-3 md:mb-4" itemProp="description">{course.description}</p>
                 
               </div>
-            </a>
+              </a>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -677,48 +724,55 @@ const steps = [
 
 const HowItWorksSection = () => (
   <section id="how-it-works" className="py-12 md:py-24 bg-secondary/30 relative overflow-hidden" itemScope itemType="https://schema.org/HowTo">
-    <DotPattern className="opacity-30" />
-    
+    <ParallaxLayer speed={0.06} className="absolute inset-0">
+      <DotPattern className="opacity-30" />
+    </ParallaxLayer>
+
     <div className="container mx-auto px-4 md:px-6 relative z-10">
-      <header className="text-center mb-8 md:mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium mb-4 md:mb-6 border border-primary/20">
-          <Target className="w-3 h-3 md:w-4 md:h-4" />
-          Simple Process
-        </div>
-        <h2 className="font-serif text-2xl md:text-4xl lg:text-5xl mb-3 md:mb-4" itemProp="name">
-          How It Works
-        </h2>
-        <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto" itemProp="description">
-          Your learning journey in four simple steps
-        </p>
-      </header>
-      
+      <ScrollReveal direction="up">
+        <header className="text-center mb-8 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium mb-4 md:mb-6 border border-primary/20">
+            <Target className="w-3 h-3 md:w-4 md:h-4" />
+            Simple Process
+          </div>
+          <h2 className="font-serif text-2xl md:text-4xl lg:text-5xl mb-3 md:mb-4" itemProp="name">
+            How It Works
+          </h2>
+          <p className="text-muted-foreground text-sm md:text-lg max-w-2xl mx-auto" itemProp="description">
+            Your learning journey in four simple steps
+          </p>
+        </header>
+      </ScrollReveal>
+
       <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-          {steps.map((step, index) => (
-            <div 
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6" staggerDelay={0.1}>
+          {steps.map((step) => (
+            <StaggerItem
               key={step.number}
-              className="group relative rounded-2xl md:rounded-3xl bg-card border border-border/50 p-4 md:p-8 hover:border-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 animate-slide-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-              itemScope
-              itemType="https://schema.org/HowToStep"
-              itemProp="step"
+              variant="slideUp"
+              className="group relative rounded-2xl md:rounded-3xl bg-card border border-border/50 p-4 md:p-8 hover:border-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5"
             >
-              <div className="flex items-start gap-3 md:gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg shadow-primary/25" itemProp="position" content={step.number}>
-                    <step.icon className="w-5 h-5 md:w-7 md:h-7 text-white" />
+              <div
+                itemScope
+                itemType="https://schema.org/HowToStep"
+                itemProp="step"
+              >
+                <div className="flex items-start gap-3 md:gap-6">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg shadow-primary/25" itemProp="position" content={step.number}>
+                      <step.icon className="w-5 h-5 md:w-7 md:h-7 text-white" />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-xs md:text-sm font-bold text-primary mb-1 md:mb-2">{step.number}</div>
+                    <h3 className="font-serif text-base md:text-xl mb-1 md:mb-2" itemProp="name">{step.title}</h3>
+                    <p className="text-muted-foreground text-xs md:text-base leading-relaxed" itemProp="text">{step.description}</p>
                   </div>
                 </div>
-                <div>
-                  <div className="text-xs md:text-sm font-bold text-primary mb-1 md:mb-2">{step.number}</div>
-                  <h3 className="font-serif text-base md:text-xl mb-1 md:mb-2" itemProp="name">{step.title}</h3>
-                  <p className="text-muted-foreground text-xs md:text-base leading-relaxed" itemProp="text">{step.description}</p>
-                </div>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </div>
   </section>
@@ -727,33 +781,39 @@ const HowItWorksSection = () => (
 const CTASection = () => (
   <section className="py-12 md:py-24 relative overflow-hidden" itemScope itemType="https://schema.org/WebPageElement">
     <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-primary/80" aria-hidden="true" />
-    <DotPattern className="opacity-10" />
-    <div className="absolute top-0 left-1/2 w-64 md:w-96 h-64 md:h-96 bg-accent/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" aria-hidden="true" />
-    
+    <ParallaxLayer speed={0.04} className="absolute inset-0">
+      <DotPattern className="opacity-10" />
+    </ParallaxLayer>
+    <ParallaxLayer speed={0.1} className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="w-64 md:w-96 h-64 md:h-96 bg-accent/20 rounded-full blur-3xl" aria-hidden="true" />
+    </ParallaxLayer>
+
     <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
-      <div className="max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/10 text-white/90 text-xs md:text-sm font-medium mb-4 md:mb-6 border border-white/20">
-          <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
-          Start for free, no credit card required
+      <ScrollReveal direction="up">
+        <div className="max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/10 text-white/90 text-xs md:text-sm font-medium mb-4 md:mb-6 border border-white/20">
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
+            Start for free, no credit card required
+          </div>
+          <h2 className="font-serif text-2xl md:text-4xl lg:text-5xl text-primary-foreground mb-4 md:mb-6" itemProp="headline">
+            Ready to Begin Your Journey?
+          </h2>
+          <p className="text-primary-foreground/80 text-sm md:text-lg max-w-2xl mx-auto mb-6 md:mb-10" itemProp="description">
+            Join thousands of students learning to code with AI guidance. When you're ready to learn, your AI guru awaits.
+          </p>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 md:gap-4">
+            <a
+              href="http://app.idhrona.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-white text-primary rounded-full font-semibold hover:bg-white/90 transition-all hover:shadow-xl hover:-translate-y-0.5"
+            >
+              Get Started
+              <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+            </a>
+          </div>
         </div>
-        <h2 className="font-serif text-2xl md:text-4xl lg:text-5xl text-primary-foreground mb-4 md:mb-6" itemProp="headline">
-          Ready to Begin Your Journey?
-        </h2>
-        <p className="text-primary-foreground/80 text-sm md:text-lg max-w-2xl mx-auto mb-6 md:mb-10" itemProp="description">
-          Join thousands of students learning to code with AI guidance. When you're ready to learn, your AI guru awaits.
-        </p>
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 md:gap-4">
-          <a 
-            href="http://app.idhrona.com/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-white text-primary rounded-full font-semibold hover:bg-white/90 transition-all hover:shadow-xl hover:-translate-y-0.5"
-          >
-            Get Started
-            <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-          </a>
-        </div>
-      </div>
+      </ScrollReveal>
     </div>
   </section>
 );
@@ -761,20 +821,22 @@ const CTASection = () => (
 const Footer = () => (
   <footer className="py-8 md:py-12 border-t border-border bg-secondary/30" itemScope itemType="https://schema.org/WPFooter">
     <div className="container mx-auto px-4 md:px-6">
-      <div className="flex flex-col items-center gap-4 md:gap-6">
-        <div className="flex items-center gap-3">
-          <img src={logo} alt="iDhrona - Interactive Learning Platform for Programming Educators" className="h-8 md:h-10 w-auto" width="120" height="40" itemProp="logo" />
+      <ScrollReveal direction="up" distance={10} duration={0.4}>
+        <div className="flex flex-col items-center gap-4 md:gap-6">
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="iDhrona - Interactive Learning Platform for Programming Educators" className="h-8 md:h-10 w-auto" width="120" height="40" itemProp="logo" />
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
+            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors text-xs md:text-sm">Features</a>
+            <a href="#demo" className="text-muted-foreground hover:text-foreground transition-colors text-xs md:text-sm">Demo</a>
+            <a href="http://app.idhrona.com/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors text-xs md:text-sm">Courses</a>
+            <a href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors text-xs md:text-sm">How It Works</a>
+          </div>
+          <p className="text-muted-foreground text-xs md:text-sm text-center" itemProp="copyrightHolder">
+            © <span itemProp="copyrightYear">2025</span> <span itemProp="name">iDhrona</span>. When the student is ready, the master appears.
+          </p>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
-          <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors text-xs md:text-sm">Features</a>
-          <a href="#demo" className="text-muted-foreground hover:text-foreground transition-colors text-xs md:text-sm">Demo</a>
-          <a href="http://app.idhrona.com/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors text-xs md:text-sm">Courses</a>
-          <a href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors text-xs md:text-sm">How It Works</a>
-        </div>
-        <p className="text-muted-foreground text-xs md:text-sm text-center" itemProp="copyrightHolder">
-          © <span itemProp="copyrightYear">2025</span> <span itemProp="name">iDhrona</span>. When the student is ready, the master appears.
-        </p>
-      </div>
+      </ScrollReveal>
     </div>
   </footer>
 );
